@@ -17,6 +17,8 @@ def umap_network(df, nn, metric = 'manhattan'):
 def scaled_transition(G, nodes = None):
     if nodes == None:
         nodes = list(G.nodes())
+    else:
+        G = G.subgraph(nodes)
 
     A = nx.adjacency_matrix(G)
     temp = G.out_degree(weight = 'weight')
@@ -81,3 +83,8 @@ def nearest_neighbor(G,labels):
             prediction = 0
         out[node] = prediction
     return out
+
+def largest_connected_component(G):
+    l = nx.weakly_connected_components(G)
+    return max(l,key=lambda x:len(x))
+

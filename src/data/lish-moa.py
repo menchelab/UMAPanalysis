@@ -4,7 +4,8 @@ import numpy as np
 
 X_unclassified = pd.read_csv("data/raw/lish-moa/test_features.csv", index_col = 0)
 X_classified = pd.read_csv("data/raw/lish-moa/train_features.csv", index_col = 0)
-X = pd.concat([X_classified, X_unclassified])
+X_classified = X_classified[~X_classified.isna().any(axis = 1)] 
+X= pd.concat([X_classified, X_unclassified])
 
 
 y_classified = pd.read_csv("data/raw/lish-moa/train_targets_scored.csv", index_col = 0)
@@ -29,6 +30,7 @@ metadata["known"] = known
 features = X[[i for i in X.columns if i not in metadata_columns]]
 features_unscaled = features.copy()
 features = features_unscaled / features_unscaled.std(axis = 0)
+
 
 features.to_csv("data/intermediate/lish-moa/features.csv")
 features_unscaled.to_csv("data/intermediate/lish-moa/features_unscaled.csv")

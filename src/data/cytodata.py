@@ -2,10 +2,7 @@
 import pandas as pd
 import numpy as np
 
-import os
-os.chdir('//')
 
-#df = pd.read_csv("data/raw/lish-moa/sample_submission.csv", index_col = 0)
 X_unclassified = pd.read_csv("data/raw/cytodata/validation_data.csv");
 X_classified = pd.read_csv("data/raw/cytodata/training_data.csv");
 
@@ -14,7 +11,7 @@ X_unclassified['known'] = 0
 
 X_unclassified = X_unclassified.set_index("cell_code")
 X_classified = X_classified.set_index("cell_code")
-X = pd.concat([X_classified, X_unclassified]);
+X = pd.concat([X_classified, X_unclassified], sort = True)
 
 targets = list(X.target.unique())
 targets.remove(np.nan)

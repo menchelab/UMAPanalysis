@@ -31,8 +31,10 @@ Now the interesting step:
 
 ```python
 from UMAP_analysis import umap_network
-G = umap_network(df)
+G = umap_network(df, 5)
 ```
+
+the second argument is the out-degree of nodes in your network
 
 G will be a networkx network representing the similarity between the datapoints.This step might take a minute or so. My dataframe with 10,000 rows and 20 columns takes a couple of minutes.
 
